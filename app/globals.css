@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Default time accent (overwritten at runtime by TimeTheme based on hour) */
+  --time-accent:     124 58 237;   /* brand violet */
+  --time-accent-dim: 109 40 217;
+}
+
+/* Time-of-day palettes (set by TimeTheme via [data-time-band] on <html>) */
+html[data-time-band="morning"] {
+  --time-accent:     245 158  11;  /* sunrise amber */
+  --time-accent-dim: 217 119   6;
+}
+html[data-time-band="day"] {
+  --time-accent:      99 102 241;  /* focus indigo */
+  --time-accent-dim:  79  70 229;
+}
+html[data-time-band="evening"] {
+  --time-accent:     249 115  22;  /* sunset coral */
+  --time-accent-dim: 234  88  12;
+}
+html[data-time-band="night"] {
+  --time-accent:      79  70 229;  /* twilight indigo */
+  --time-accent-dim:  67  56 202;
+}
+
+html, body {
+  background: #FAFAF9;
+  color: #18181B;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle radial wash that picks up the current time accent —
+   gives the whole app a quiet ambient mood without being noisy. */
+body {
+  background-image:
+    radial-gradient(900px 500px at 80% -100px, rgb(var(--time-accent) / 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgb(var(--time-accent) / 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+
+/* Light scrollbars */
+::-webkit-scrollbar          { width: 10px; height: 10px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: #D4D4D8; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+/* Skeleton shimmer (light) */
+.skeleton {
+  background: linear-gradient(90deg, #F4F4F5 0%, #E5E5EA 50%, #F4F4F5 100%);
+  background-size: 800px 100%;
+  @apply animate-shimmer;
+}
+
+/* Focus rings — use the time accent so it feels of-a-piece */
+.focus-ring:focus-visible,
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid rgb(var(--time-accent));
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection { background: rgb(var(--time-accent) / 0.20); color: #18181B; }
