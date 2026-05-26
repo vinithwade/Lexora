@@ -100,7 +100,7 @@ function DeviceCard({ tab }: { tab: "web" | "mobile" }) {
           <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 text-[9px] text-white">Lexora</div>
         </div>
         <div className="rounded-lg bg-zinc-800 grid place-items-center relative">
-          <div className="h-16 w-16 rounded-full bg-gradient-to-br from-violet-300 to-fuchsia-500 grid place-items-center text-white text-sm font-medium">VW</div>
+          <img src="/images/avatars/you.jpg" alt="You" className="h-16 w-16 rounded-full object-cover" loading="lazy" />
           <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 text-[9px] text-white">You</div>
         </div>
       </div>

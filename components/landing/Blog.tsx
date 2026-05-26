@@ -6,30 +6,48 @@ import { cn } from "@/lib/cn";
 
 const FEATURED = {
   badge: "MUST READ",
-  title: "How daily standups built a $100k/mo solo business",
-  excerpt: "What changed when one operator made AI standups a non-negotiable part of his day. The numbers, the rituals, and the failures along the way.",
-  author: "Liam Chen",
-  role: "Head of Operations",
+  title: "How twice-daily check-ins took a solo SaaS from $0 to $14k MRR",
+  excerpt: "For 11 months, Marcus shipped nothing that stuck. Then he committed to a 7-minute morning plan and a 5-minute evening review — every single day. Here's the unedited log of what broke, what compounded, and the week the streak almost died.",
+  author: "Marcus Whitfield",
+  role: "Founder, Polaris Analytics",
+  date: "May 21, 2026",
+  readTime: "9 min read",
+  img: "/images/blog/featured.jpg",
   bg: "from-amber-200 via-stone-200 to-rose-200",
 };
 
 const POSTS = [
   {
-    title: "The 3-task rule: why fewer priorities ship more code",
-    badge: "TOOLS",
+    title: "The 3-task rule: why capping your day ships more, not less",
+    excerpt: "We analyzed 4,200 morning meets. The users who completed the most work planned the fewest tasks.",
+    badge: "PRODUCTIVITY",
     badgeColor: "bg-blue-600",
+    author: "Priya Nair",
+    date: "May 18, 2026",
+    readTime: "6 min read",
+    img: "/images/blog/three-task.jpg",
     bg: "from-blue-100 to-sky-200",
   },
   {
-    title: "A complete guide to weekly reviews in 2026",
-    badge: "INSIGHT",
+    title: "Running a weekly review that actually changes next week",
+    excerpt: "A 20-minute Friday ritual that turns seven days of noise into one decision for Monday.",
+    badge: "GUIDE",
     badgeColor: "bg-amber-500",
+    author: "Daniel Osei",
+    date: "May 12, 2026",
+    readTime: "8 min read",
+    img: "/images/blog/weekly-review.jpg",
     bg: "from-stone-200 to-amber-100",
   },
   {
-    title: "What an AI accountability coach actually feels like",
-    badge: "MANAGEMENT",
+    title: "What talking to an AI accountability coach actually feels like",
+    excerpt: "It's not a chatbot and it's not a manager. We sat in on 30 first sessions to find out what it is.",
+    badge: "PRODUCT",
     badgeColor: "bg-emerald-600",
+    author: "Sofia Reyes",
+    date: "May 6, 2026",
+    readTime: "5 min read",
+    img: "/images/blog/ai-coach.jpg",
     bg: "from-emerald-100 to-stone-100",
   },
 ];
@@ -47,13 +65,17 @@ export function Blog() {
 
         {/* Featured */}
         <FadeIn delay={120} className="mt-12">
-          <article className="rounded-3xl overflow-hidden bg-white border border-zinc-200 shadow-card grid md:grid-cols-2 cursor-pointer group">
-            <div className={`relative aspect-[1.4/1] md:aspect-auto bg-gradient-to-br ${FEATURED.bg}`}>
-              {/* Vignette */}
-              <div className="absolute inset-0" style={{
-                background: "radial-gradient(closest-side at 30% 30%, rgba(255,255,255,0.5), transparent), radial-gradient(closest-side at 70% 70%, rgba(0,0,0,0.10), transparent)",
-              }}/>
-              <span className="absolute top-5 left-5 inline-flex items-center px-3 py-1 rounded-full bg-stone-700 text-white text-[11px] font-semibold tracking-wider">
+          <article className="surface surface-hover rounded-3xl overflow-hidden grid md:grid-cols-2 cursor-pointer group">
+            <div className={`relative aspect-[1.4/1] md:aspect-auto bg-gradient-to-br ${FEATURED.bg} overflow-hidden`}>
+              <img
+                src={FEATURED.img}
+                alt={FEATURED.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              {/* Vignette for badge legibility */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-transparent" />
+              <span className="absolute top-5 left-5 inline-flex items-center px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur text-white text-[11px] font-semibold tracking-wider">
                 {FEATURED.badge}
               </span>
             </div>
@@ -68,10 +90,17 @@ export function Blog() {
 
               <div className="mt-auto pt-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-gradient-to-br from-stone-300 to-stone-500" />
+                  <img
+                    src="/images/avatars/marcus.jpg"
+                    alt={FEATURED.author}
+                    className="h-9 w-9 rounded-full object-cover"
+                    loading="lazy"
+                  />
                   <div className="text-sm">
                     <div className="font-semibold text-zinc-900">{FEATURED.author}</div>
-                    <div className="text-zinc-500 text-xs">{FEATURED.role}</div>
+                    <div className="text-zinc-500 text-xs">
+                      {FEATURED.role} · {FEATURED.date} · {FEATURED.readTime}
+                    </div>
                   </div>
                 </div>
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500 text-white text-[11px] font-semibold tracking-wider">
@@ -88,9 +117,12 @@ export function Blog() {
             <FadeIn key={p.title} delay={i * 60}>
               <article className="group cursor-pointer">
                 <div className={`relative aspect-[1.6/1] rounded-2xl bg-gradient-to-br ${p.bg} overflow-hidden`}>
-                  <div className="absolute inset-0" style={{
-                    background: "radial-gradient(closest-side at 50% 50%, rgba(255,255,255,0.4), transparent)",
-                  }}/>
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="mt-4 flex items-start justify-between gap-3">
                   <h3 className="text-lg font-semibold text-zinc-900 leading-snug group-hover:text-zinc-700 transition-colors">
@@ -99,6 +131,12 @@ export function Blog() {
                   <span className={cn("inline-flex flex-shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold text-white tracking-wider", p.badgeColor)}>
                     {p.badge}
                   </span>
+                </div>
+                <p className="mt-2 text-sm text-zinc-600 leading-relaxed">
+                  {p.excerpt}
+                </p>
+                <div className="mt-3 text-xs text-zinc-500">
+                  {p.author} · {p.date} · {p.readTime}
                 </div>
               </article>
             </FadeIn>

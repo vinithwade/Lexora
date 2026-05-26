@@ -53,7 +53,7 @@ function SocialCard({
     <a
       href={href}
       target="_blank" rel="noopener noreferrer"
-      className="group block rounded-3xl bg-white border border-zinc-200 p-7 shadow-card hover:shadow-cardHover hover:-translate-y-0.5 transition-all duration-300"
+      className="surface surface-hover group block rounded-3xl p-7"
     >
       <div className="flex items-start justify-between">
         <div className={`h-14 w-14 rounded-2xl ${logoBg} grid place-items-center shadow-sm`}>

@@ -13,12 +13,16 @@ export default async function ProfilePage() {
   const { data: profile } = await supabase
     .from("profiles").select("full_name, email").eq("id", user.id).single();
 
+  const meta = user.user_metadata ?? {};
+  const avatarUrl = (meta.avatar_url || meta.picture || null) as string | null;
+
   return (
     <PageContainer>
       <PageHeader title="Profile" description="Your account, name, and avatar." />
       <ProfileForm
         name={profile?.full_name || ""}
         email={profile?.email || user.email || ""}
+        avatarUrl={avatarUrl}
       />
     </PageContainer>
   );

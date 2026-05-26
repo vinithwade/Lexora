@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Input, Label, FormHint } from "@/components/ui/Input";
 import { useToast } from "@/components/ui/Toast";
 
-export default function ProfileForm({ name: initialName, email }: { name: string; email: string }) {
+export default function ProfileForm({ name: initialName, email, avatarUrl }: { name: string; email: string; avatarUrl?: string | null }) {
   const router = useRouter();
   const supabase = createClient();
   const toast = useToast();
@@ -33,7 +33,7 @@ export default function ProfileForm({ name: initialName, email }: { name: string
       <Card>
         <CardHeader title="Account" description="How you appear inside Lexora." />
         <div className="flex items-center gap-4 mb-6">
-          <Avatar name={name || "User"} size={64} />
+          <Avatar name={name || "User"} src={avatarUrl} size={64} />
           <div>
             <div className="text-base font-medium">{name || "Unnamed"}</div>
             <div className="text-sm text-fgMuted">{email}</div>

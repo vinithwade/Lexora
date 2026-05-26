@@ -18,8 +18,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   if (!profile?.onboarded) redirect("/onboarding");
 
+  // Google (and other OAuth) sign-ins carry a profile photo in the auth user's
+  // metadata — surface it so the avatar shows their real picture, not initials.
+  const meta = user.user_metadata ?? {};
+  const avatarUrl = (meta.avatar_url || meta.picture || null) as string | null;
+
   return (
-    <AppShell user={{ name: profile.full_name || "", email: profile.email || "" }}>
+    <AppShell user={{ name: profile.full_name || "", email: profile.email || "", avatarUrl }}>
       {children}
     </AppShell>
   );

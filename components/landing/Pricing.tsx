@@ -70,10 +70,10 @@ export function Pricing() {
               key={t.name}
               delay={i * 80}
               className={cn(
-                "relative rounded-3xl border bg-white p-7 flex flex-col",
+                "relative rounded-3xl p-7 flex flex-col transition-all duration-300",
                 t.highlight
-                  ? "border-sky-300 ring-1 ring-sky-200 bg-gradient-to-b from-sky-100/80 via-white to-stone-50 shadow-cardHover scale-[1.02]"
-                  : "border-zinc-200 shadow-card"
+                  ? "border border-sky-300/70 ring-1 ring-sky-200/70 bg-gradient-to-b from-sky-100/80 via-white to-stone-50 shadow-cardHover scale-[1.02] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.9),0_24px_60px_-20px_rgba(56,120,210,0.30)]"
+                  : "surface surface-hover"
               )}
             >
               {t.highlight && (
@@ -117,10 +117,10 @@ export function Pricing() {
 
               <Link href="/signup" className="block mt-7">
                 <button className={cn(
-                  "w-full inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-medium transition-colors",
+                  "w-full inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-medium transition-all duration-200",
                   t.highlight
-                    ? "bg-zinc-900 text-white hover:bg-zinc-800"
-                    : "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50"
+                    ? "sheen text-white bg-gradient-to-b from-zinc-800 to-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_10px_24px_-8px_rgba(15,15,20,0.5)] hover:brightness-110"
+                    : "surface surface-hover text-zinc-900"
                 )}>
                   {t.cta}
                 </button>

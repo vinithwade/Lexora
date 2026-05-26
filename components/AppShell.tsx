@@ -23,7 +23,7 @@ export function AppShell({
   children, user,
 }: {
   children: React.ReactNode;
-  user: { name: string; email: string };
+  user: { name: string; email: string; avatarUrl?: string | null };
 }) {
   const router = useRouter();
 
@@ -47,7 +47,7 @@ export function AppShell({
 function TopBar({
   user, onLogout,
 }: {
-  user: { name: string; email: string };
+  user: { name: string; email: string; avatarUrl?: string | null };
   onLogout: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -77,7 +77,7 @@ function TopBar({
           className="flex items-center gap-2 rounded-full p-1 pr-3 hover:bg-panel2 transition-colors border border-transparent hover:border-border"
           aria-label="Open user menu"
         >
-          <Avatar name={user.name} size={28} />
+          <Avatar name={user.name} src={user.avatarUrl} size={28} />
           <span className="text-sm font-medium text-fg hidden sm:inline">
             {(user.name || "").split(" ")[0] || "Me"}
           </span>
@@ -87,7 +87,7 @@ function TopBar({
           <div className="absolute right-0 top-full mt-2 w-64 rounded-xl bg-panel border border-border shadow-cardHover p-1 animate-slide-up origin-top-right z-30">
             <div className="px-3 py-3 border-b border-border">
               <div className="flex items-center gap-3">
-                <Avatar name={user.name} size={36} />
+                <Avatar name={user.name} src={user.avatarUrl} size={36} />
                 <div className="min-w-0">
                   <div className="text-sm font-medium text-fg truncate">{user.name || "You"}</div>
                   <div className="text-xs text-fgSubtle truncate">{user.email}</div>

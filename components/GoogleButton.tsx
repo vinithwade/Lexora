@@ -15,19 +15,31 @@ export default function GoogleButton({ label }: { label: string }) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
+        // Land back on our own origin so localhost dev works regardless of the
+        // project's Site URL. This exact URL must be listed in Supabase → Auth
+        // → URL Configuration → Redirect URLs, or Supabase ignores it.
         redirectTo: `${window.location.origin}/auth/callback`,
         queryParams: { access_type: "offline", prompt: "consent" },
       },
     });
     if (error) {
-      toast.error("Couldn't sign in with Google", error.message);
+      // Almost every failure here is configuration, not a bug — surface the fix.
+      const msg = /provider is not enabled|Unsupported provider/i.test(error.message)
+        ? "Enable Google in Supabase → Authentication → Providers, then add your Google OAuth client ID & secret."
+        : /redirect/i.test(error.message)
+        ? `Add ${window.location.origin}/auth/callback to Supabase → Auth → URL Configuration → Redirect URLs.`
+        : error.message;
+      toast.error("Couldn't sign in with Google", msg);
       setBusy(false); return;
     }
     if (!data?.url) {
-      toast.error("Google provider not enabled", "Enable it in Supabase → Auth → Providers.");
+      toast.error(
+        "Google provider not enabled",
+        "Turn it on in Supabase → Authentication → Providers and add your Google OAuth credentials."
+      );
       setBusy(false); return;
     }
-    // browser is being redirected; no further code runs here
+    // data.url is set: the browser is now being redirected to Google.
   }
 
   return (

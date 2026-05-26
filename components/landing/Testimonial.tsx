@@ -8,16 +8,19 @@ const SMALL = [
     quote: "I used to lose my mornings to indecision. Lexora locks in the day in 90 seconds — best habit I've added in years.",
     name: "Leah Daniel",
     role: "Design Ops Lead, Teamwork",
+    img: "/images/avatars/leah.jpg",
   },
   {
     quote: "The evening review hits different. The AI doesn't let me wave off skipped tasks. Streak does the rest.",
     name: "Sergio Walker",
     role: "Agency owner",
+    img: "/images/avatars/sergio.jpg",
   },
   {
     quote: "We used to duct-tape stand-ups across Slack. Now my whole team runs the same morning cadence with Lexora.",
     name: "Jane Yamamoto",
     role: "Engineering Manager, Mercury",
+    img: "/images/avatars/jane.jpg",
   },
 ];
 
@@ -33,7 +36,7 @@ export function Testimonial() {
 
         <FadeIn delay={120}>
           <div className="mt-8 inline-flex flex-col items-center">
-            <Avatar name="Aanya Sharma" size={56} />
+            <Avatar name="Aanya Sharma" src="/images/avatars/aanya.jpg" size={56} />
             <div className="mt-3 font-semibold text-zinc-900">Aanya Sharma</div>
             <div className="text-sm text-zinc-500">Founder &amp; CEO, Northwind Labs</div>
           </div>
@@ -42,10 +45,10 @@ export function Testimonial() {
         <div className="mt-16 grid md:grid-cols-3 gap-5 text-left">
           {SMALL.map((t, i) => (
             <FadeIn key={t.name} delay={i * 80}>
-              <div className="rounded-2xl bg-white border border-zinc-200 p-6 shadow-card h-full flex flex-col">
+              <div className="surface surface-hover rounded-2xl p-6 h-full flex flex-col">
                 <p className="text-sm text-zinc-700 leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
                 <div className="mt-6 flex items-center gap-3">
-                  <Avatar name={t.name} size={36} />
+                  <Avatar name={t.name} src={t.img} size={36} />
                   <div>
                     <div className="text-sm font-semibold text-zinc-900">{t.name}</div>
                     <div className="text-xs text-zinc-500">{t.role}</div>
