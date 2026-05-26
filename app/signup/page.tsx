@@ -14,7 +14,6 @@ import GoogleButton from "@/components/GoogleButton";
 
 export default function SignupPage() {
   const router = useRouter();
-  const supabase = createClient();
   const toast = useToast();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +25,7 @@ export default function SignupPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setErr(null); setInfo(null);
+    const supabase = createClient();
     const { data, error } = await supabase.auth.signUp({
       email, password, options: { data: { full_name: name } },
     });

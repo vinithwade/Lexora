@@ -14,7 +14,6 @@ import GoogleButton from "@/components/GoogleButton";
 
 export default function LoginPage() {
   const router = useRouter();
-  const supabase = createClient();
   const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +28,7 @@ export default function LoginPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setErr(null);
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
     if (error) { setErr(error.message); toast.error("Login failed", error.message); return; }
