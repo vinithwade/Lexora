@@ -12,13 +12,13 @@ import { useToast } from "@/components/ui/Toast";
 
 export default function ProfileForm({ name: initialName, email, avatarUrl }: { name: string; email: string; avatarUrl?: string | null }) {
   const router = useRouter();
-  const supabase = createClient();
   const toast = useToast();
   const [name, setName] = useState(initialName);
   const [busy, setBusy] = useState(false);
 
   async function save() {
     setBusy(true);
+    const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.replace("/login"); return; }
     const { error } = await supabase.from("profiles").update({ full_name: name }).eq("id", user.id);
