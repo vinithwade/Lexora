@@ -11,7 +11,7 @@ export function FadeIn({
   children: React.ReactNode;
   className?: string;
   delay?: number;     // ms
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
