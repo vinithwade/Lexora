@@ -9,7 +9,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen lg:grid lg:grid-cols-[1.05fr_1fr]">
       <HeroPanel />
 
-      <section className="flex items-center justify-center px-5 sm:px-8 py-10 lg:py-12 min-h-screen">
+      <section className="relative flex items-center justify-center px-5 sm:px-8 py-10 lg:py-12 min-h-screen">
         <div className="w-full max-w-md">
           {/* Mobile-only brand (desktop sees brand on hero panel) */}
           <Link href="/" className="lg:hidden flex items-center justify-center gap-2 mb-8">
@@ -18,7 +18,11 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
             </div>
             <span className="font-semibold text-lg">Lexora</span>
           </Link>
-          {children}
+          {/* Premium glossy card so the form reads as a real, lit surface —
+              same surface language as the landing page. */}
+          <div className="surface rounded-3xl p-6 sm:p-8">
+            {children}
+          </div>
         </div>
       </section>
     </div>
@@ -66,9 +70,13 @@ function HeroPanel() {
 
       {/* Center: orb + tagline */}
       <div className="relative px-10 flex flex-col items-center text-center">
-        <div
-          className="h-48 w-48 rounded-full bg-gradient-to-br from-time to-timeDim shadow-glowLg animate-orb-idle mb-10"
-        />
+        <div className="relative h-48 w-48 mb-10 animate-orb-idle">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-time to-timeDim shadow-glowLg" />
+          {/* glossy rim + specular highlight so the orb reads as a lit sphere */}
+          <div className="absolute inset-0 rounded-full ring-1 ring-white/30" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/35 via-transparent to-black/10" />
+          <div className="absolute top-7 left-10 h-16 w-16 rounded-full bg-white/55 blur-2xl" />
+        </div>
         <h2 className="text-3xl xl:text-4xl font-semibold tracking-tight leading-[1.1] text-fg max-w-md">
           Your AI accountability coach,<br />
           <span className="text-time">on call twice a day.</span>
@@ -96,7 +104,7 @@ function HeroPanel() {
 
 function Feature({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="rounded-lg bg-white/70 backdrop-blur border border-border px-3 py-2.5 flex items-center gap-2 shadow-card">
+    <div className="glass rounded-xl px-3 py-2.5 flex items-center gap-2">
       <span className="text-time">{icon}</span>
       <span className="text-xs font-medium text-fg">{label}</span>
     </div>

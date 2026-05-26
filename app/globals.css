@@ -34,13 +34,69 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* Subtle radial wash that picks up the current time accent —
-   gives the whole app a quiet ambient mood without being noisy. */
+/* Layered ambient wash that picks up the current time accent — a soft,
+   premium glow that frames the page without ever looking noisy. */
 body {
   background-image:
-    radial-gradient(900px 500px at 80% -100px, rgb(var(--time-accent) / 0.08), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, rgb(var(--time-accent) / 0.05), transparent 60%);
+    radial-gradient(1100px 620px at 82% -140px, rgb(var(--time-accent) / 0.10), transparent 62%),
+    radial-gradient(900px 520px at -12% 108%, rgb(var(--time-accent) / 0.06), transparent 60%),
+    radial-gradient(700px 700px at 50% -10%, rgba(255,255,255,0.7), transparent 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #FAFAF9 38%, #F6F6F8 100%);
   background-attachment: fixed;
+}
+
+@layer components {
+  /* Frosted glass — for floating chrome (nav, popovers, overlays). */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 10px 30px -12px rgba(16, 24, 40, 0.18);
+  }
+
+  /* Premium card surface — faint vertical gradient, hairline border, and a
+     top highlight so it reads as a real, lit physical surface. */
+  .surface {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FCFCFD 100%);
+    border: 1px solid rgba(16, 24, 40, 0.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 8px 24px -10px rgba(16, 24, 40, 0.10);
+    transition: box-shadow 280ms ease, transform 280ms ease;
+  }
+  .surface-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 4px rgba(16, 24, 40, 0.05),
+      0 20px 44px -16px rgba(16, 24, 40, 0.20);
+  }
+
+  /* Moving specular sheen for glossy buttons / chips. */
+  .sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.35) 48%,
+      transparent 60%
+    );
+    transform: translateX(-130%);
+    transition: transform 700ms ease;
+    pointer-events: none;
+  }
+  .sheen:hover::after { transform: translateX(130%); }
 }
 
 * { -webkit-tap-highlight-color: transparent; }

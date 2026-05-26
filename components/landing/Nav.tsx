@@ -29,11 +29,11 @@ export function Nav() {
     <header className="fixed top-4 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
       <div
         className={cn(
-          "pointer-events-auto inline-flex items-center gap-1 rounded-full transition-all duration-300",
+          "glass pointer-events-auto inline-flex items-center gap-1 rounded-full transition-all duration-300",
           "px-1.5 py-1.5 max-w-[min(960px,calc(100%-2rem))]",
           scrolled
-            ? "bg-white/85 backdrop-blur-xl border border-zinc-200/80 shadow-[0_10px_30px_-10px_rgba(15,15,20,0.18)]"
-            : "bg-white/70 backdrop-blur border border-zinc-200/60 shadow-[0_6px_20px_-8px_rgba(15,15,20,0.12)]"
+            ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_14px_38px_-12px_rgba(15,15,20,0.22)]"
+            : ""
         )}
       >
         <Link href="/" className="flex items-center gap-2 pl-3 pr-2 py-1">
@@ -63,7 +63,7 @@ export function Nav() {
           </Link>
           <Link
             href="/signup"
-            className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 transition-colors shadow-[0_4px_12px_-4px_rgba(15,15,20,0.4)]"
+            className="sheen inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-medium bg-gradient-to-b from-zinc-800 to-zinc-950 hover:brightness-110 transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_6px_16px_-6px_rgba(15,15,20,0.5)]"
           >
             Try Lexora free
           </Link>

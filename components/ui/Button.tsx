@@ -15,21 +15,21 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-accent hover:bg-accentDim text-white shadow-card hover:shadow-cardHover",
+    "sheen text-white bg-gradient-to-b from-accent to-accentDim shadow-button hover:shadow-buttonHover hover:brightness-[1.04] active:brightness-95",
   secondary:
-    "bg-panel hover:bg-panel2 text-fg border border-border shadow-card",
+    "surface surface-hover text-fg hover:bg-panel2",
   ghost:
     "bg-transparent hover:bg-panel2 text-fg border border-transparent",
   danger:
     "bg-red-50 hover:bg-red-100 text-red-700 border border-red-200",
   google:
-    "bg-panel hover:bg-panel2 text-fg border border-border shadow-card",
+    "surface text-fg hover:bg-panel2",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-8  px-3 text-xs gap-1.5 rounded-md",
-  md: "h-10 px-4 text-sm gap-2   rounded-lg",
-  lg: "h-12 px-6 text-base gap-2 rounded-lg",
+  sm: "h-8  px-3 text-xs gap-1.5 rounded-lg",
+  md: "h-10 px-4 text-sm gap-2   rounded-xl",
+  lg: "h-12 px-6 text-base gap-2 rounded-xl",
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(

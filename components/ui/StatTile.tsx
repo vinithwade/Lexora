@@ -12,8 +12,8 @@ export function StatTile({
 }) {
   return (
     <div className={cn(
-      "rounded-xl bg-panel border border-border p-4 shadow-card",
-      accent && "border-accent/40",
+      "surface surface-hover rounded-2xl p-4",
+      accent && "ring-1 ring-accent/30",
       className
     )}>
       <div className="flex items-center gap-2 text-fgMuted text-xs uppercase tracking-wide">

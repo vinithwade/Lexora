@@ -6,9 +6,9 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-xl bg-panel border border-border shadow-card",
+        "surface rounded-2xl",
         padded && "p-5",
-        hover && "transition-colors hover:border-border2",
+        hover && "surface-hover",
         className
       )}
       {...props}

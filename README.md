@@ -1,103 +1,68 @@
 # Lexora
 
-Two AI video meetings a day. Plan in the morning. Review in the evening. Build the streak.
+**Your AI accountability coach — on call twice a day.**
 
-Lexora is a real-time AI accountability coach for founders and operators. Users video-call Lexora twice a day — the morning meet extracts the day's task list, the evening meet reviews progress and updates the streak.
+Plan your day in the morning. Walk your wins in the evening. Keep the streak alive.
 
-## Tech
+---
 
-- Next.js 15 (App Router) + TypeScript + Tailwind
-- Supabase (Postgres + Auth + RLS)
-- OpenAI Realtime API (`gpt-realtime`) over WebRTC — audio streams browser↔OpenAI directly, our server only mints ephemeral tokens
-- Resend for email reminders
-- Vercel Cron for the 5-min-before-meet notification scan
+## The problem we're solving
 
-## One-time setup
+Most people don't fail because they lack a to-do app. They fail because nobody is *watching*. Founders, operators, and solo builders wake up with a hundred directions to run in, pick the loudest one instead of the most important one, and end the day unsure whether they actually moved forward.
 
-### 1. Create the Supabase project
+Accountability is the thing that works — a coach, a co-founder, a standup — but real accountability is expensive, scheduled around other people, and easy to ghost. Streak apps don't talk back. Productivity tools track tasks but never ask *"did you actually do it?"*
 
-1. Go to <https://supabase.com> → "New project". Name it `lexora`. Pick a region close to you. Save the database password.
-2. In Project Settings → API, copy:
-   - **Project URL** → `NEXT_PUBLIC_SUPABASE_URL`
-   - **anon public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - **service_role key** → `SUPABASE_SERVICE_ROLE_KEY` (server-only)
-3. Open SQL Editor → "+ New query" → paste the entire contents of [`supabase/schema.sql`](supabase/schema.sql) → click **Run**. You should see "Success. No rows returned."
-4. Authentication → Providers → confirm Email is enabled. For local dev you can switch off email confirmation (Authentication → Email → "Confirm email" off) so you can sign up and immediately get a session.
+**Lexora is the accountability partner that shows up every day, costs almost nothing, and never lets you quietly skip.**
 
-### 2. Get an OpenAI API key
+## What Lexora is
 
-1. <https://platform.openai.com/api-keys> → Create new secret key.
-2. Make sure your account has Realtime API access.
-3. Copy the key.
+Lexora is a real-time AI coach you actually *talk to* — a short face-to-face voice call, twice a day:
 
-### 3. (Optional) Resend for email reminders
+- **Morning meet (~90 seconds).** You tell Lexora what matters today. It pushes back, narrows you to your top 3–5 priorities, and pins them to your dashboard.
+- **Evening meet (~5 minutes).** Lexora walks every task with you, marks each one honestly — done, skipped, or carried over — and updates your streak.
 
-If you want the 5-min-before email reminders to work locally, sign up at <https://resend.com>, grab an API key, and verify a sender domain (or use `onboarding@resend.dev` for testing — only sends to your own verified email).
+That's the whole loop. Plan → ship → review → repeat. The streak only survives if you actually do the work, so it *means* something.
 
-### 4. Configure env
+## Who it's for
+
+Founders, indie hackers, operators, and anyone running their own day with no one above them to answer to. If your calendar is empty but your ambition isn't, Lexora is the structure you've been improvising.
+
+## What you get
+
+- 🎙️ **Real conversations, not forms.** Voice-first meetings that feel like talking to a sharp coach — not filling out another tracker.
+- 🎯 **The 3-task rule.** Lexora forces focus. Fewer priorities, actually finished, beats a bloated list you ignore.
+- 🔥 **A streak that's earned.** Your streak only ticks when you genuinely hit your day. No participation trophies.
+- 📊 **Honest reviews.** The evening coach doesn't let you wave off what you skipped — it names it, so tomorrow is sharper.
+- ⏰ **Two appointments you can't snooze.** Set your morning and evening times once; Lexora reminds you and is waiting when it's time.
+- 📈 **Insights over time.** Watch your consistency, completion rate, and momentum compound week over week.
+
+## What we're aiming to build
+
+We're not building another habit tracker. We're building the **default operating system for self-driven people** — the daily rhythm that turns intention into shipped work.
+
+The bigger bet: most ambitious people already have the talent. What they're missing is a *system that holds them to it.* If we get the daily loop right, everything else compounds. Here's where we're taking it:
+
+- **A coach that knows you.** Lexora should remember last week, notice when you keep dodging the same task, and adjust how it pushes you — like a coach who's been with you for months, not a fresh chat every time.
+- **Teams and squads.** Shared streaks, visible commitments, and a morning cadence a whole startup runs on together.
+- **The work, not just the words.** Connect the tools where work actually happens so reviews are grounded in reality, not just self-report.
+- **Coaching that gets smarter.** Patterns across thousands of days, turned back into better questions, better nudges, and better days for every user.
+
+The north star: **you end every day knowing you moved the right things forward — and a year of those days adds up to something you're proud of.**
+
+## Where we are
+
+Lexora is an **early-stage MVP** — the core daily loop is live and working, and we're shaping it fast. Things will change quickly. That's the point: we're building in the open, learning from real days, and shipping every week.
+
+---
+
+## For developers
+
+This is a Next.js + Supabase app; the live meetings run on OpenAI's Realtime API.
 
 ```bash
-cp .env.local.example .env.local
-# fill in NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY,
-# SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY, CRON_SECRET (any random string)
+npm install
+cp .env.local.example .env.local   # add your Supabase + OpenAI keys
+npm run dev                         # http://localhost:3000
 ```
 
-### 5. Run
-
-```bash
-npm install   # already done if you got here from the assistant
-npm run dev
-```
-
-Open <http://localhost:3000>.
-
-## How to test the full loop
-
-1. Sign up at `/signup` with any email + password.
-2. You'll be sent to `/onboarding` — set a morning time within ±30 min of *right now* so you can immediately try the morning meet.
-3. Land on `/dashboard` — the "Join meeting" button shows up because you're inside the meeting window.
-4. Click it. Allow mic + camera permissions. The AI greets you, asks for your top priorities, then calls the `create_tasks` tool. Tasks appear on the dashboard.
-5. Repeat with the evening meet (set evening time within ±30 min of now). The AI walks through your tasks, marks each done/skipped, and your streak ticks up if ≥70% completion.
-
-## Project layout
-
-```
-app/
-  page.tsx                  landing
-  login/, signup/           auth
-  onboarding/               first-run setup
-  dashboard/                today's tasks + streak
-  settings/                 change meet times
-  meeting/[id]/             the live AI video call
-  api/
-    realtime/session/       mints OpenAI ephemeral tokens
-    meeting/start/          create meeting row
-    meeting/end/            mark complete
-    meeting/message/        persist transcript turn
-    meeting/tool/           handles AI tool calls (create_tasks, finish_meeting)
-    cron/notify/            email reminders 5 min before
-  auth/callback/            Supabase auth redirect
-lib/
-  supabase/                 server / client / admin / middleware helpers
-  prompts.ts                morning + evening AI instructions + tool schemas
-  time.ts                   timezone math
-components/                 shared UI
-supabase/schema.sql         the SQL to paste into Supabase
-vercel.json                 cron schedule
-```
-
-## Deploying to Vercel
-
-1. Push to GitHub.
-2. Import the repo in Vercel.
-3. Add the same env vars as `.env.local`. Set `NEXT_PUBLIC_APP_URL` to the deployed URL.
-4. Cron starts running automatically (every minute hits `/api/cron/notify`).
-
-## Cost rough math
-
-- OpenAI Realtime: ~$0.30 per 5-min meet
-- Supabase free tier covers <500 MAU
-- Vercel free tier covers a small launch
-- Resend free tier: 100 emails/day
-
-At 1000 DAU × 2 meets/day, plan for ~$18k/month — almost entirely OpenAI.
+Full setup (Supabase project + schema, API keys, deploy, and the daily-loop walkthrough) lives in [`docs/SETUP.md`](docs/SETUP.md).

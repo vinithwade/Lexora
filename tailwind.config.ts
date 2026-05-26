@@ -51,9 +51,15 @@ export default {
         "2xl":"1.125rem",
       },
       boxShadow: {
-        // Light-theme shadows: subtle elevation, no heavy darkness
-        card:  "0 1px 2px rgba(15, 15, 20, 0.04), 0 1px 6px rgba(15, 15, 20, 0.04)",
-        cardHover: "0 4px 16px rgba(15, 15, 20, 0.08)",
+        // Premium light-theme elevation: layered, soft, with a faint top highlight
+        card:  "0 1px 2px rgba(16,24,40,0.04), 0 2px 6px -1px rgba(16,24,40,0.05), 0 8px 24px -8px rgba(16,24,40,0.06)",
+        cardHover: "0 2px 4px -1px rgba(16,24,40,0.06), 0 10px 24px -8px rgba(16,24,40,0.12), 0 24px 48px -16px rgba(16,24,40,0.16)",
+        // Glossy surfaces: inner top sheen + soft ambient drop
+        glossy: "inset 0 1px 0 0 rgba(255,255,255,0.7), 0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -10px rgba(16,24,40,0.12)",
+        glossyHover: "inset 0 1px 0 0 rgba(255,255,255,0.8), 0 2px 4px rgba(16,24,40,0.06), 0 18px 40px -14px rgba(16,24,40,0.20)",
+        // Glossy on a dark/brand fill (primary button)
+        button: "inset 0 1px 0 0 rgba(255,255,255,0.18), 0 1px 2px rgba(16,24,40,0.10), 0 8px 20px -6px rgba(124,58,237,0.35)",
+        buttonHover: "inset 0 1px 0 0 rgba(255,255,255,0.24), 0 2px 4px rgba(16,24,40,0.12), 0 14px 30px -8px rgba(124,58,237,0.45)",
         glow:  "0 0 0 1px rgb(var(--time-accent) / 0.25), 0 6px 24px rgb(var(--time-accent) / 0.25)",
         glowLg:"0 0 60px rgb(var(--time-accent) / 0.35), 0 0 0 1px rgb(var(--time-accent) / 0.20)",
       },
